@@ -4,8 +4,11 @@ import os
 
 # this two lines are for loading the videos.
 # in this case the video are named as: example_1.mp4, example_2.mp4, ...,
-videofiles = [n for n in os.listdir('.') if n[0]=='e' and n[-4:]=='.mp4' and (n[-5]=='2' or n[-5]=='1' )]
+
+# videofiles = [n for n in os.listdir('.') if n[0]=='e' and n[-4:]=='.mp4' and (n[-5]=='2' or n[-5]=='1' )]
 # videofiles = sorted(videofiles, key=lambda item: int( item.partition('.')[0][3:]))
+
+videofiles = [n for n in os.listdir('.') if n[0]=='e' and n[-4:]=='.mp4']
 videofiles = sorted(videofiles)
 
 video_index = 0
