@@ -16,9 +16,14 @@ cap = cv2.VideoCapture(videofiles[0])
 
 # video resolution: 1624x1234 px
 # fourcc = cv2.cv.CV_FOURCC('F','M','P', '4')
-fourcc = cv2.cv.CV_FOURCC(*'MP4V')
+# fourcc = cv2.cv.CV_FOURCC(*'MP4V')
+# fourcc = cv2.cv.CV_FOURCC(*'X264')
+fourcc = cv2.cv.CV_FOURCC(*'XVID')
 
-out = cv2.VideoWriter("video.mp4", fourcc, 15, (1624, 1234), 1)
+name = "concatenated.avi"
+
+#out = cv2.VideoWriter("concatenated.mp4", fourcc, 15, (1624, 1234), 1)
+out = cv2.VideoWriter(name,fourcc,15.0,(640,480))
 
 while(cap.isOpened()):
     ret, frame = cap.read()
@@ -29,8 +34,9 @@ while(cap.isOpened()):
             break
         cap = cv2.VideoCapture(videofiles[ video_index ])
         ret, frame = cap.read()
-    cv2.imshow('frame',frame)
-    out.write(frame)
+    if ret==True:	
+    	cv2.imshow('frame',frame)
+    	out.write(frame)
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
