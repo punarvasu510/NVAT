@@ -85,22 +85,7 @@ while True:
 		
 		# compute the bounding box for the contour, draw it on the frame,
 		# and update the text
-		'''
-		dur = str(camera.get(cv2.CAP_PROP_POS_MSEC))
-		for stream in metadata.streams:
-			if stream.isVideo():
-				a = round(float(stream.start_time),0)
-		m, s = divmod(a, 60)
-		h, m = divmod(m, 60)
-		t2 = timedelta(hours=h, minutes=m)
-		a1 = round(float(dur),0)
-		m1,s1 = divmod(a1,60)
-		h1, m1 = divmod(m1, 60)
-		t4 = timedelta(hours=h1, minutes=m1)
-		time = t2 - t1
-		time = time + t4
-		print time
-		'''
+		
         count=0
         if datetime.now().time() > date.time():
 			
