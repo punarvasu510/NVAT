@@ -11,7 +11,7 @@ from ffprobe import FFProbe
 
 # python3 DetectIntruder.py
 if len(sys.argv) == 1:
-	camera = cv2.VideoCapture('example_1.mp4')
+	camera = cv2.VideoCapture('bus.mp4')
 	time.sleep(0.25)
 # python3 DetectIntruder.py videos/example_1.mp4
 else:
@@ -24,7 +24,7 @@ flag=0
 flag1=0 
 
 
-metadata=FFProbe('example_1.mp4')
+#metadata=FFProbe('example_1.mp4')
 # initialize the first frame in the video stream
 firstFrame = None
 i=0
@@ -77,12 +77,12 @@ while True:
 	t1 = timedelta(hours=11, minutes=14)
 	t3 = timedelta(hours=1, minutes=30)
 	
-	date=datetime(2018,2,22,7,30)
+	date=datetime(2018,2,22,5,00)
 	
-	
+	flag1=0
 	for c in cnts:
 		
-		flag1=1
+		
 		# compute the bounding box for the contour, draw it on the frame,
 		# and update the text
 		'''
@@ -101,21 +101,22 @@ while True:
 		time = time + t4
 		print time
 		'''
-		
-		if datetime.now().time() > date.time():
+        count=0
+        if datetime.now().time() > date.time():
 			
-			(x, y, w, h) = cv2.boundingRect(c)
-			cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
-			success,image = camera.read()
-			if flag1==1:
-				cv2.imwrite("frame%d%d.jpg" % (flag,count), image)
-				flag1=0
-			#crop_img = image[y:y+w, x:x+h]
-			#cv2.imwrite("cropFrame%d.jpg" % count, crop_img)
-			count += 1
-			text = "DETECTED !!!"
-			flag=flag+1
-			out.write(frame)
+            (x, y, w, h) = cv2.boundingRect(c)
+            cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
+            success,image = camera.read()
+			#if flag1==0:
+				#cv2.imwrite("frame%d%d.jpg" % (flag,count), image)
+			#	flag1=1
+            crop_img = image[y:y+h, x:x+w]
+            #if count==0:
+            cv2.imwrite("cropFrame%d.jpg" % count, crop_img)
+            count += 1
+            text = "DETECTED!!!"    
+            flag=flag+1
+            out.write(frame)
 	
 	# draw the text and timestamp on the frame
 	#print str(camera.get(cv2.CAP_PROP_POS_MSEC)
