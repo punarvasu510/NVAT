@@ -56,21 +56,23 @@ class Db:
         selectQuery = ("SELECT serial_number, video_id FROM tapestry where intruder_id = $id ORDER BY serial_number ASC");
         cursor = conn.cursor()
         cursor.execute(selectQuery)
-        intermediate_dir = "'/home/punarvasu510/Alekhya/FinalYearProject/GIT/NVAT/OpenCV_trials/"
-        text = ""
+        intermediate_dir = "/home/punarvasu510/Alekhya/FinalYearProject/GIT/NVAT/OpenCV_trials/"
+
         for (serial_number,video_id) in cursor:
             text_script = "ffmpeg -i " + str(video_id) + ".mp4 -c copy -bsf:v h264_mp4toannexb -f mpegts intermediate_" + str(serial_number) + ".ts"
         #           ffmpeg -i     example_1   .mp4 -c copy -bsf:v h264_mp4toannexb -f mpegts intermediate_          1          .ts
-            comm = "echo " + text_script + " >> script_intermediate"
+            comm = "echo " + text_script + " >> script_intermediate_test"
             call(comm, shell = True)
 
-            text_input = "file " + intermediate_dir + "intermediate_" + str(serial_number) + ".ts'"
-            comm = "echo " + text_input + " >> input.txt"
+            text_input = "file " + intermediate_dir + "intermediate_" + str(serial_number) + ".ts"
+            comm = "echo " + text_input + " >> input_test.txt"
             call(comm, shell = True)
 
-        call(["./script_intermediate"])
-        call("ffmpeg -f concat -safe 0 -i input.txt -c copy output.mp4", shell = True)
+        call("chmod 755 script_intermediate_test", shell = True)
+        call("./script_intermediate_test", shell = True)
+        call("ffmpeg -f concat -safe 0 -i input_test.txt -c copy output.mp4", shell = True)
         call("rm intermediate_*", shell = True)
+        call("rm *_test*",shell = True)
 
 
 if __name__ == '__main__':
