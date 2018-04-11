@@ -1,0 +1,45 @@
+<html>
+    <head>
+        <title>
+            Video
+        </title>
+    </head>
+
+    <body>
+        {%if play == False%}
+            <center>
+                <h1>
+                    Video Saved
+                </h1>
+            </center>
+        {%else%}
+            {%if error==True%}
+                <center>
+                    <h1>
+                        Video name not entered
+                    </h1>
+                </center>
+            {%else%}
+                <center>
+                        <h1>
+                            Playing Video {{vname}}
+                        </h1>
+                        <video width="320" height="240" controls>
+                            <!--
+                                ADD THE LINE BELOW TO ACTUALLY LOAD THE VIDEO
+                                source src="{{ url_for('static', filename='videos/{{vname}}') }}" type="video/mp4">
+                            -->
+                        </video> 
+                </center>
+            {%endif%}
+        {%endif%}
+        <center>
+            <br><br><br>
+                <form action="/" method="get">
+                    <button type="submit">
+                        Go back
+                    </button>
+                </form>
+        </center>
+    </body>
+</html>
