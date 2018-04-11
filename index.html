@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title> NVAT </title>
+</head>
+<body>
+
+  <div>
+    <form action="{{ url_for('/getTapestry') }}" method="get">
+      <input type="datetime-local" name="timestamp">
+      <input type="submit" value="Get Tapestry">
+    </form>
+  </div>
+
+</body>
+</html>
