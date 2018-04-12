@@ -2,28 +2,46 @@
 <html>
 <head>
   <title> NVAT </title>
+  <link rel = "stylesheet" href = "css/style.css">
 </head>
-<body>
-
+<body class = "wrapper">
+<center>
   <div>
+	<center>
+		<h1>Novel Video And Tapestry (NVAT)<h1>
+		<p class = "titles">An automated surveillance and intrusion detection software</p>
+	</center>
 
+	<p class = "notes">
+	Welcome to NVAT, an automated system for the detection of intruders and general surveillance.
+	Our website lets you count, detect and trace the path of an unwanted trespasser(s) without the need of a human monitoring system.
+	<p class = "highlight">Please select an option from the list below:
+	</p>
+
+
+	<h2>1)Click to get total count of intruders:
     <form action="{{ url_for('getTotalCountFirst') }}" method="get">
-      <input type="submit" name="query1" value="getTotalCount" >
+      <input type="submit" name="query1" value="Submit" >
     </form>
+	</h2>
 
+	<h2>2)Click to get all intruders profiles:
     <form action="{{ url_for('getIntrudersFirst') }}" method="get">
-      <input type="submit" name="query2" value="getIntruders">
+      <input type="submit" name="query2" value="Submit">
     </form>
+	</h2>
 
-    <form action="{{ url_for('getVideoClipsFirst') }}" method="get">
-      <input type="submit" name="query3" value="getVideoClips">
-    </form>
-
+  <h2>3)Click for tapestry:
     <form action="{{ url_for('intruderClipsFirst') }}" method="get">
-      <input type="submit" name="query4" value="intruderClips">
+      <input type="submit" name="query4" value="Submit">
     </form>
+	</h2>
+
+	<p class = "bottom">Done in collaboration with PESIT Banglore South Campus under the guidance of Dr. J Surya Prasad.<br />
+	Members: Alekhya V, Vineetha N, Tarun R, Mohammed T (Department of Computer Science and Engineering).
+	</p>
 
   </div>
-
+</center>
 </body>
 </html>

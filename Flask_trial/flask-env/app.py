@@ -22,7 +22,15 @@ def getIntrudersFirst():
 
 @app.route('/getVideoClips')
 def getVideoClipsFirst():
-    return render_template('getVideoClips.html')
+    t1 = str(request.values.get("t1"))
+    t2 = str(request.values.get("t2"))
+    intruderid = request.values.get("intid")
+
+    video_clips_list = UserQuery.get_intruder_video_clips(intruderid,t1,t2)
+
+    #print str(video_clips_list)
+
+    return render_template('getVideoClips.html', t1=t1, t2=t2, intid=intruderid, video_list = video_clips_list)
 
 @app.route('/intruderClips')
 def intruderClipsFirst():
@@ -53,11 +61,10 @@ def getIntrudersNext():
     t2 = t2.replace("T"," ") + ":00"
     t2 = datetime.strptime(t2, "%Y-%m-%d %I:%M:%S")
 
-    intruder_id_list  = UserQuery.get_intruders(t1,t2)
+    intruder_id_list = UserQuery.get_intruders(t1,t2)
 
-    #print str(intruder_id_list)
-    
-    return render_template('getIntruders.html', list=True, idlist=intruder_id_list)
+    return render_template('getIntruders.html', list=True, idlist=intruder_id_list, t1=t1, t2=t2)
+
 
 if __name__ == '__main__':
    app.run()

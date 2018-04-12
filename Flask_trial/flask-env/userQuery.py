@@ -46,9 +46,11 @@ class UserQuery:
 
 	@staticmethod
 	def get_intruders(t1, t2):
-
+		print "inside get_intruders"
 		conn = None
 		intruder_id_list  = []
+		intruder_image_path_list  = []
+		result = []
 		try:
 
 			conn = Db.get_connection()
@@ -59,14 +61,37 @@ class UserQuery:
 			cursor.execute(selectQuery)
 
 			results = cursor.fetchall()
+
 			for row in results:
 				intruder_id_list.append(row[0])
+
+			print "length of intruder_id_list-------------" + str(len(intruder_id_list))
 
 		except Exception as e:
 			logging.exception("Error while retrieving intruders from table")
 
 		Db.disconnect(conn)
-		
+		"""
+		#path = "/home/punarvasu510/Alekhya/FinalYearProject/GIT/NVAT/FinalCodes/intruder_profiles/"
+
+		extension = ".jpg"
+
+		intruder_image_path_list  = []
+		result = {}
+
+		for each in intruder_id_list:
+			image = path + str(each) + extension
+			intruder_image_path_list.append(image)
+
+		print "length of intruder_image_path_list-------------" + str(len(intruder_image_path_list))
+
+		print str(intruder_id_list)
+		print str(intruder_image_path_list)
+
+		#result = { "id":intruder_id_list , "image":intruder_image_path_list }
+
+		#return result
+		"""
 		return intruder_id_list
 
 	@staticmethod
