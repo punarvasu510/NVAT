@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title> NVAT </title>
+</head>
+<body>
+
+  <div>
+
+    <h1> getTotalCount </h1>
+
+    <h3> This query is to get total count of intruders in a given timerange </h3>
+    <form action="{{ url_for('getTotalCountNext') }}", method="get">
+
+      Enter the lower limit of time range <input type="datetime-local" name="t1">
+      Enter the upper limit of time range <input type="datetime-local" name="t2">
+      <input type="submit" value="Get Total Count of intruders" >
+
+    </form>
+
+  </div>
+
+</body>
+</html>

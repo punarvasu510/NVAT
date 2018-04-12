@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title> NVAT </title>
+</head>
+<body>
+
+  <div>
+
+    <form action="{{ url_for('getTotalCountFirst') }}" method="get">
+      <input type="submit" name="query1" value="getTotalCount" >
+    </form>
+
+    <form action="{{ url_for('getIntrudersFirst') }}" method="get">
+      <input type="submit" name="query2" value="getIntruders">
+    </form>
+
+    <form action="{{ url_for('getVideoClipsFirst') }}" method="get">
+      <input type="submit" name="query3" value="getVideoClips">
+    </form>
+
+    <form action="{{ url_for('intruderClipsFirst') }}" method="get">
+      <input type="submit" name="query4" value="intruderClips">
+    </form>
+
+  </div>
+
+</body>
+</html>
