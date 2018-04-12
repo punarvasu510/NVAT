@@ -1,5 +1,6 @@
 from flask import Flask,render_template,json, request,redirect,url_for, jsonify
-import userQuery.py
+from userQuery import UserQuery
+from datetime import datetime
 
 app = Flask(__name__)
 
@@ -29,17 +30,31 @@ def intruderClipsFirst():
 
 @app.route('/getTotalCountNext')
 def getTotalCountNext():
-    t1 = request.values.get("t1")
-    t2 = request.values.get("t2")
-    count = getTotalCount(t1,t2)
-    return "The total count of intruders in range " + t1 + " and " + t2 + " is " + count
+    t1 = str(request.values.get("t1"))
+    t2 = str(request.values.get("t2"))
+
+    t1 = t1.replace("T"," ") + ":00"
+    t1 = datetime.strptime(t1, "%Y-%m-%d %I:%M:%S")
+
+    t2 = t2.replace("T"," ") + ":00"
+    t2 = datetime.strptime(t2, "%Y-%m-%d %I:%M:%S")
+
+    count = UserQuery.get_intruder_count(t1,t2)
+    return "The total count of intruders in range " + str(t1) + " and " + str(t2) + " is " + str(count)
 
 @app.route('/getIntrudersNext')
 def getIntrudersNext():
-     t1 = request.values.get("t1")
-     t2 = request.values.get("t2")
-     intruder_list  = getIntruders(t1,t2)
-     return "The list of intruders in the range " + t1 + " and " + t2 + " is :"
+    t1 = str(request.values.get("t1"))
+    t2 = str(request.values.get("t2"))
+
+    t1 = t1.replace("T"," ") + ":00"
+    t1 = datetime.strptime(t1, "%Y-%m-%d %I:%M:%S")
+
+    t2 = t2.replace("T"," ") + ":00"
+    t2 = datetime.strptime(t2, "%Y-%m-%d %I:%M:%S")
+
+    intruder_list  = UserQuery.get_intruders(t1,t2)
+    return "The list of intruders in the range " + str(t1) + " and " + str(t2) + " is :"
 
 if __name__ == '__main__':
    app.run()
