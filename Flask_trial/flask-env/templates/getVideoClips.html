@@ -2,33 +2,76 @@
 <html>
 <head>
   <title> NVAT </title>
-  <link rel = "stylesheet" href = "css/style.css">
+  <style media="screen" type="text/css">
+  h1 {
+  color: white;
+  font-size: 30px;
+  font-family: georgia, ariel;
+  font-weight: bold;
+}
+
+.titles {
+  color:#E9E9E9;
+  font-size: 20px;
+  font-style: italic;
+}
+
+.notes {
+  color: #E9E9E9;
+  font-size: 20px;
+}
+
+.highlight {
+  color: red;
+  font-size: 20px;
+}
+
+h3 {
+  color: #4EB1BA;
+  font-size: 20px;
+}
+
+
+p {
+  color:#E9E9E9;
+  font-size: 20px;
+}
+
+.bottom {
+    position: fixed;
+    bottom: 0;
+  font-size: 10px;
+}
+
+.wrapper {
+  background-color: #222930;
+}
+</style>
 </head>
 <body class = "wrapper">
   <center>
     <div>
 
-      <h1> getVideoClips </h1>
-      <ul>
-
-        <li> time 1 : {{ t1 }}
-        <li> time 2 : {{ t2 }}
-        <li> intruder id : {{ intid }}
-
-      </ul>
+      <h1> Video clips of intruder {{ intid }} </h1>
+      <h4> Time range </h4>
+      <h5> Time 1 : {{ t1 }}</h5>
+      <h5> Time 2 : {{ t2 }}</h5>
 
       {% for video_data in video_list %}
-      <ul>
+      <table>
 
-        <li>
-         id : {{ video_data.id }}
-         camera_id : {{ video_data.camera_id }}
-         start_time : {{ video_data.start_time }}
-         end_time :   {{ video_data.end_time }}
-         file_path :  {{ video_data.file_path }}
-         <video width="320" height="240" controls="controls">
-           <source src="/static/{{video_data.file_path}}" type="video/mp4">
-         </video>
+        <tr>
+          <td>
+            <video width="320" height="240" controls="controls">
+              <source src="/static/{{video_data.file_path}}" type="video/mp4">
+            </video>
+          </td>
+          <td>id : {{ video_data.id }}</td>
+          <td>camera_id : {{ video_data.camera_id }}</td>
+          <td>start_time : {{ video_data.start_time }}</td>
+          <td>end_time :   {{ video_data.end_time }}</td>
+         <!--file_path :  {{ video_data.file_path }} -->
+
 
        </li>
 

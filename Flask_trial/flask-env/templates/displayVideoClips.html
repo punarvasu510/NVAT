@@ -1,0 +1,63 @@
+<html>
+<head>
+<style media="screen" type="text/css">
+	h1 {
+	color: white; 
+	font-size: 30px; 
+	font-family: georgia, ariel;
+	font-weight: bold; 
+}
+
+.titles {
+	color:#E9E9E9;
+	font-size: 20px;
+	font-style: italic;
+}
+
+.notes {
+	color: #E9E9E9;
+	font-size: 20px;
+}
+
+.highlight {
+	color: red;
+	font-size: 20px;
+}
+
+h2 {
+	color: #4EB1BA;
+	font-size: 20px;
+}
+
+
+p {
+	color:#4EB1BA;
+	font-size: 20px;
+}
+
+.bottom {
+    position: fixed;
+    bottom: 0;
+	font-size: 10px;
+}
+
+.wrapper {
+	background-color: #222930;
+}
+
+
+
+
+
+	</style>
+</head>
+<body>
+	{% for clip in idlist %}
+	<div><p>Video File Path : <b>{{ clip.file_path }}</b></p></div>
+	<div><p>Video Start Time : <b>{{ clip.start_time }}</b></p></div>
+	<div><p>Video End Time : <b>{{ clip.end_time }}</b></p></div>
+	<a href="playVideo?path={{clip.file_path}}"> Click to view video </a>
+    {% endfor %}
+	
+</body>
+</html>
