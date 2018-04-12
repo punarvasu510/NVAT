@@ -155,3 +155,5 @@ if __name__ == '__main__':
 	for video_data in video_list:
 		print "Video id: {}, camera id: {}, start time: {}, end time: {}, file_path: {}".format( \
 				video_data.id, video_data.camera_id, video_data.start_time, video_data.end_time, video_data.file_path)
+
+	
