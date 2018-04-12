@@ -42,7 +42,6 @@ class UserQuery:
 
 		Db.disconnect(conn)
 
-		print "count---------------" + str(type(count))
 		return count
 
 	@staticmethod
@@ -67,7 +66,7 @@ class UserQuery:
 			logging.exception("Error while retrieving intruders from table")
 
 		Db.disconnect(conn)
-
+		
 		return intruder_id_list
 
 	@staticmethod

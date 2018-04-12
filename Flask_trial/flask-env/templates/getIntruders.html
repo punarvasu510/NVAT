@@ -5,20 +5,33 @@
 </head>
 <body>
 
-  <div>
+  <center>
+    <div id="form">
 
-    <h1> getIntruders </h1>
+      <h1> getIntruders </h1>
 
-    <h3> This query is to get a list of intruder images in a given timerange </h3>
-    <form action="{{ url_for('getIntrudersNext') }}", method="get">
+      <h3> This query is to get a list of intruder images in a given timerange </h3>
+      <form action="{{ url_for('getIntrudersNext') }}", method="get">
 
-      Enter the lower limit of time range <input type="datetime-local" name="t1">
-      Enter the upper limit of time range <input type="datetime-local" name="t2">
-      <input type="submit" value="Get list of intruder images" >
+        Enter the lower limit of time range <input type="datetime-local" name="t1">
+        Enter the upper limit of time range <input type="datetime-local" name="t2">
+        <input type="submit" value="Get list of intruder images" >
 
-    </form>
+      </form>
+    <div>
 
-  </div>
+    </div id="list">
+      {%if list==True%}
+
+        {% for element in idlist%}
+        <ul>
+          <li>{{element}}</li>
+        </ul>
+        {%endfor%}
+
+      {%endif%}
+    </div>
+  </center>
 
 </body>
 </html>

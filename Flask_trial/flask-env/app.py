@@ -53,8 +53,11 @@ def getIntrudersNext():
     t2 = t2.replace("T"," ") + ":00"
     t2 = datetime.strptime(t2, "%Y-%m-%d %I:%M:%S")
 
-    intruder_list  = UserQuery.get_intruders(t1,t2)
-    return "The list of intruders in the range " + str(t1) + " and " + str(t2) + " is :"
+    intruder_id_list  = UserQuery.get_intruders(t1,t2)
+
+    #print str(intruder_id_list)
+    
+    return render_template('getIntruders.html', list=True, idlist=intruder_id_list)
 
 if __name__ == '__main__':
    app.run()
