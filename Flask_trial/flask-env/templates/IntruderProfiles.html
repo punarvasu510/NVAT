@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title> NVAT </title>
+  <style media="screen" type="text/css">
+  h1 {
+  color: white;
+  font-size: 30px;
+  font-family: georgia, ariel;
+  font-weight: bold;
+}
+
+.titles {
+  color:#E9E9E9;
+  font-size: 20px;
+  font-style: italic;
+}
+
+.notes {
+  color: #E9E9E9;
+  font-size: 20px;
+}
+
+.highlight {
+  color: red;
+  font-size: 20px;
+}
+
+a {
+  color: white;
+  font-size: 20px;
+}
+
+p {
+  color:#E9E9E9;
+  font-size: 20px;
+}
+
+.bottom {
+    position: fixed;
+    bottom: 0;
+  font-size: 10px;
+}
+
+.wrapper {
+  background-color: #222930;
+}
+</style>
+</head>
+<body class = "wrapper" background="/static/bgim2.jpg">
+
+  <center>
+
+  <div id="list">
+
+    <center><h1> Intruder Profiles</h1></center>
+
+    <p class = "highlight"> This query is to get a list of intruder images in a given timerange </p>
+
+    <h3> <a href="{{ url_for('home')}}"> Home </a> </h3>
+
+    <table>
+    {% for element in idlist%}
+
+      <tr><td>
+        <form action="{{ url_for('getTapestry') }}", method="get">
+
+          <img src="/static/{{element}}.jpg" width="100" height="100" onclick="submit()"/>
+
+          <input type="hidden" value="{{element}}" name="intid">
+          <input type="hidden" value="{{t1}}" name="t1">
+          <input type="hidden" value="{{t2}}" name="t2">
+
+        </form>
+      </td></tr>
+
+    {%endfor%}
+    </table>
+
+  </div>
+
+  </center>
+
+</body>
+</html>

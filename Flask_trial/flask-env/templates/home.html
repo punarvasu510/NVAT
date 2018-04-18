@@ -1,94 +1,142 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title> NVAT </title>
-  <style media="screen" type="text/css">
-  h1 {
-  color: white;
-  font-size: 30px;
-  font-family: georgia, ariel;
-  font-weight: bold;
-}
-
-.titles {
-  color:#E9E9E9;
-  font-size: 20px;
-  font-style: italic;
-}
-
-.notes {
-  color: #E9E9E9;
-  font-size: 20px;
-}
-
-.highlight {
-  color: red;
-  font-size: 20px;
-}
-
-h3 {
-  color: #4EB1BA;
-  font-size: 20px;
-}
-
-h2 {
-  color: white;
-}
-
-p {
-  color:#E9E9E9;
-  font-size: 20px;
-}
-
-.bottom {
-    position: fixed;
-    bottom: 0;
-  font-size: 10px;
-}
-
-.wrapper {
-  background-color: #222930;
-}
-</style>
+  <title>NVAT</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
+  .btn-default {
+      background: #000;
+      color: #fff;
+  }
+  .btn-default:hover {
+      background: #fff;
+      color: #000;
+  }
+  body {
+      position: relative;
+  }
+  #section1 {padding-top:50px; height:500px; color: white; background-image: url("/static/bgim1.jpg");}
+  #section2 {padding-top:50px; height:500px; color: white; background-image: url("/static/bgim2.jpg");}
+  #section3 {padding-top:50px; height:500px; color: white; background-image: url("/static/bgim3.jpg");}
+  #section4 {padding-top:50px; height:500px; color: white; background-image: url("/static/bgim1.jpg");}
+  </style>
 </head>
-<body class = "wrapper">
-<center>
-  <div>
-	<center>
-		<h1>Novel Video And Tapestry (NVAT)<h1>
-		<p class = "titles">An automated surveillance and intrusion detection software</p>
-	</center>
+<body data-spy="scroll" data-target=".navbar" data-offset="50">
 
-	<p class = "notes">
-	Welcome to NVAT, an automated system for the detection of intruders and general surveillance.
-	Our website lets you count, detect and trace the path of an unwanted trespasser(s) without the need of a human monitoring system.
-	<p class = "highlight">Please select an option from the list below:
-	</p>
-
-
-	<h2>1)Click to get total count of intruders:
-    <form action="{{ url_for('getTotalCountFirst') }}" method="get">
-      <input type="submit" name="query1" value="Submit" >
-    </form>
-	</h2>
-
-	<h2>2)Click to get all intruders profiles:
-    <form action="{{ url_for('getIntrudersFirst') }}" method="get">
-      <input type="submit" name="query2" value="Submit">
-    </form>
-	</h2>
-
-  <h2>3)Click for tapestries:
-    <form action="{{ url_for('intruderClipsFirst') }}" method="get">
-      <input type="submit" name="query3" value="Submit">
-    </form>
-	</h2>
-
-	<p class = "bottom">Done in collaboration with PESIT Banglore South Campus under the guidance of Dr. J Surya Prasad.<br />
-	Members: Alekhya V, Vineetha N, Tarun R, Mohammed T (Department of Computer Science and Engineering).
-	</p>
-
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Novel Video Analytics and Tapestry</a>
+    </div>
+    <div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li><a href="#section1">Home</a></li>
+          <li><a href="#section2">Intruder Count</a></li>
+          <li><a href="#section3">Intruder Specific Tapestry</a></li>
+          <li><a href="#section4">Video clips</a></li>
+        </ul>
+      </div>
+    </div>
   </div>
-</center>
+</nav>
+
+<div id="section1" class="container-fluid">
+  <h1>Home</h1>
+  <p>Welcome to NVAT, an automated system for the detection of intruders and general surveillance.</p>
+	<p>Our website lets you count, detect and trace the path of an unwanted trespasser(s) without the need of a human monitoring system.</p>
+</div>
+
+<div id="section2" class="container-fluid">
+  <h1>Get Intruder Count</h1>
+  <p> This query is to get total count of intruders in a given timerange </p>
+  <form action="{{ url_for('getTotalCount') }}" method="get" class="form-inline" onsubmit="openModal()" id="myForm">
+    <table>
+      <tr>
+        <td><p class = "notes"> Enter the lower limit of time range </p></td>
+        <td><input type="datetime-local" name="t1" style="color:#000000;"></td>
+      </tr>
+      <tr>
+        <td><p class = "notes"> Enter the upper limit of time range </p></td>
+        <td><input type="datetime-local" name="t2" style="color:#000000;"></td>
+      </tr>
+    </table>
+    <button type="submit" class="btn btn-default">Get Total Count of Intruders</button>
+  </form>
+</div>
+
+<div id="section3" class="container-fluid">
+  <h1>Get Intruder Specific Tapestry</h1>
+  <div id="form">
+    <p class = "highlight"> This query is to get a list of intruder tapestries in a given timerange </p>
+    <p> There are two steps to this:<p>
+    <p> 1) Enter the time range </p>
+    <p> 2) Choose the intruder image whose tapestry you'd like to view </p>
+
+    <form action="{{ url_for('getIntruderProfiles') }}", method="get">
+      <table>
+        <tr>
+          <td><p class = "notes"> Enter the lower limit of time range </p></td>
+          <td><input type="datetime-local" name="t1" style="color:#000000;"></td>
+        </tr>
+        <tr>
+          <td><p class = "notes"> Enter the upper limit of time range </p></td>
+          <td><input type="datetime-local" name="t2" style="color:#000000;"></td>
+        </tr>
+      </table>
+      <input type="submit" class="btn btn-default" value="Get List of Intruder Images" />
+    </form>
+
+  </div >
+
+  <div id="list">
+      {%if list==True%}
+        <table>
+        {% for element in idlist%}
+
+          <tr><td>
+            <form action="{{ url_for('getTapestry') }}", method="get">
+
+              <img src="/static/{{element}}.jpg" width="100" height="100" onclick="submit()"/>
+
+              <input type="hidden" value="{{element}}" name="intid">
+              <input type="hidden" value="{{t1}}" name="t1">
+              <input type="hidden" value="{{t2}}" name="t2">
+            </form>
+          </td></tr>
+        {%endfor%}
+        </table>
+      {%endif%}
+  </div>
+</div>
+
+<div id="section4" class="container-fluid">
+  <h1> Get All Video Clips </h1>
+  <p> This query is to get a list of intruder video clips in a given time range  </p>
+  <form action="{{ url_for('getVideoClips') }}", method="get">
+    <table>
+      <tr>
+        <td><p class = "notes"> Enter the lower limit of time range </p></td>
+        <td><input type="datetime-local" name="t1" style="color:#000000;"></td>
+      </tr>
+      <tr>
+        <td><p class = "notes"> Enter the upper limit of time range </p></td>
+        <td><input type="datetime-local" name="t2" style="color:#000000;"></td>
+      </tr>
+    </table>
+    <button type="submit" class="btn btn-default">Get Video Clips of Intruders</button>
+  </form>
+</div>
+
+
 </body>
 </html>

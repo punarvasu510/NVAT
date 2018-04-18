@@ -26,8 +26,8 @@
   font-size: 20px;
 }
 
-h3 {
-  color: #4EB1BA;
+a {
+  color: white;
   font-size: 20px;
 }
 
@@ -48,7 +48,7 @@ p {
 }
 </style>
 </head>
-<body class = "wrapper">
+<body class = "wrapper" background="/static/bgim2.jpg">
   <center>
     <div>
 
@@ -57,19 +57,9 @@ p {
     	</center>
 
       <p class = "highlight">
-      This query is to get total count of intruders in a given timerange
+      The total count of intruders in range {{ t1 }} and {{ t2 }} is {{ count }}
       </p>
 
-      <form action="{{ url_for('getTotalCountNext') }}", method="get">
-
-        <p class = "notes">
-        Enter the lower limit of time range <input type="datetime-local" name="t1">
-        <br />
-        Enter the upper limit of time range <input type="datetime-local" name="t2">
-  	    </p>
-        <input type="submit" value="Get Total Count of Intruders" >
-
-      </form>
       <h3> <a href="{{ url_for('home')}}"> Home </a> </h3>
     </div>
   </center>

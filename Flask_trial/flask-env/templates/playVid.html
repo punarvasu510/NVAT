@@ -26,8 +26,8 @@ color: red;
 font-size: 20px;
 }
 
-h3 {
-color: #4EB1BA;
+a {
+color: white;
 font-size: 20px;
 }
 
@@ -48,11 +48,12 @@ background-color: #222930;
 }
 </style>
 </head>
-<body class = "wrapper">
+<body class = "wrapper" background="/static/bgim3.jpg">
 
     <center>
+      <h3> <a href="{{ url_for('home')}}"> Home </a> </h3>
       <video width="480" height="320" controls="controls">
-      <source src="/static/{{path}}" type="video/mp4">
+        <source src="/static/{{path}}" type="video/mp4">
       </video>
     </center>
 
