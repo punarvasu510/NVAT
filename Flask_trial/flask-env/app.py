@@ -9,7 +9,7 @@ app = Flask(__name__)
 @app.route('/')
 @app.route('/home')
 def home():
-   return render_template('home.html')
+   return render_template('Home.html')
    #return "Novel Video Analytics and Tapestry"
 
 #------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -84,7 +84,7 @@ def getVideoClips():
 			print "The video clip id: {} start time: {} end time: {} ".format(clip.file_path,clip.start_time,clip.end_time)
 
 
-		return render_template('displayVideoClips.html', list=True, idlist=clips)
+		return render_template('DisplayVideoClips.html', list=True, idlist=clips)
 
 	except Exception as e:
 		logging.exception("Error while processing")
@@ -92,7 +92,7 @@ def getVideoClips():
 @app.route('/playVideo')
 def playVideo():
 	path = str(request.values.get("path"))
-	return render_template('playVid.html', path=path)
+	return render_template('PlayVid.html', path=path)
 
 #------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
