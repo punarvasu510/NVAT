@@ -4,7 +4,7 @@ import sys
     # genTape() takes the the list of names of videoclips as its parameter
     # Eg: video_list = ["Video_1_2018-02-02 01-52-51.mp4","Video_1_2018-02-02 01-53-04.mp4"]
 
-    # Loop through the video_list to add ffmpeg command ( which generates the intermediate file ) to script_intermediate_test files
+    # Loop through the video_list to add ffmpeg command ( which generates the intermediate file ) to script_intermediate_test file
     # and the intermediate file to input_test.txt , for each video
 
     # Remove any existing output.mp4
