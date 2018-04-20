@@ -61,11 +61,11 @@ table {
   <center>
     <div>
 
-      <h1> Video clips of intruder {{ intid }} </h1>
+      <h1> Tapestry of intruder {{ intid }} </h1>
       <h4> Time range </h4>
       <h5> Time 1 : {{ t1 }}</h5>
       <h5> Time 2 : {{ t2 }}</h5>
-
+<!--
       {% for video_data in video_list %}
       <table>
 
@@ -79,13 +79,18 @@ table {
           <td>camera_id : {{ video_data.camera_id }}</td>
           <td>start_time : {{ video_data.start_time }}</td>
           <td>end_time :   {{ video_data.end_time }}</td>
-         <!--file_path :  {{ video_data.file_path }} -->
+          <td>file_path :  {{ video_data.file_path }}</td>
 
 
        </li>
 
       </ul>
       {%endfor%}
+      <h1> {{ tapestry }} </h1>
+-->
+      <video width="320" height="240" controls="controls">
+        <source src="/static/{{ tapestry }}" type="video/mp4">
+      </video>
 
       <h3> <a href="{{ url_for('home')}}"> Home </a> </h3>
 

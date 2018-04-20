@@ -2,6 +2,7 @@ import logging
 from db2 import Db
 from intruder_in_action_data import IntruderInActionData
 from video_data import VideoData
+import generateTapestry
 
 class UserQuery:
 
@@ -146,14 +147,21 @@ class UserQuery:
 
 			for row in results:
 				video_clip = VideoData(row[0], row[1], row[2], row[3], row[4])
-				video_clips.append(video_clip)
+				#video_clips.append(video_clip)
+				path = video_clip.file_path
+				path = path.replace("video_clips/","")
+				video_clips.append(str(path))
 
 		except Exception as e:
 			logging.exception("Error while retrieving videos from table")
 
 		Db.disconnect(conn)
 
-		return video_clips
+		#print str(video_clips)
+		#return video_clips
+
+		output = generateTapestry.genTape(video_clips)
+		return output
 
 if __name__ == '__main__':
 	# Get total intruders in the given time range

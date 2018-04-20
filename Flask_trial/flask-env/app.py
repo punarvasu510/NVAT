@@ -51,11 +51,13 @@ def getTapestry():
     t2 = str(request.values.get("t2"))
     intruderid = request.values.get("intid")
 
-    video_clips_list = UserQuery.get_intruder_video_clips(intruderid,t1,t2)
+    #video_clips_list = UserQuery.get_intruder_video_clips(intruderid,t1,t2)
+    output_file_path = UserQuery.get_intruder_video_clips(intruderid,t1,t2)
 
-    #print str(video_clips_list)
+    output = output_file_path.split('/static/')[-1]
 
-    return render_template('Tapestry.html', t1=t1, t2=t2, intid=intruderid, video_list = video_clips_list)
+    return render_template('Tapestry.html', t1=t1, t2=t2, intid=intruderid, tapestry=output)
+    #return render_template('Tapestry.html', t1=t1, t2=t2, intid=intruderid, video_list = video_clips_list)
 
 #------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
