@@ -1,15 +1,21 @@
 from subprocess import call
 import sys
 
-    # Fetch all videos of an intruder from database
-    # Order them as per serial number ( which in determined by timestamp )
-    # Loop through the result to add ffmpeg command ( which generates the intermediate file ) for each video
-    # Loop through the result to add each intermediate file to input file (for concatenation)
-    # Concatenate
-    # Clear all intermediate files
-    # The final tapestry is stored in output.mp4
+    # genTape() takes the the list of names of videoclips as its parameter
+    # Eg: video_list = ["Video_1_2018-02-02 01-52-51.mp4","Video_1_2018-02-02 01-53-04.mp4"]
 
-    # To execute: python generateTapestry.py <absolute-path-to-videos-directory>
+    # Loop through the video_list to add ffmpeg command ( which generates the intermediate file ) to script_intermediate_test files
+    # and the intermediate file to input_test.txt , for each video
+
+    # Remove any existing output.mp4
+
+    # Generate the intermediate files
+    # Concatenate the intermediate files
+
+    # Clear all intermediate files
+    # Clear the script_intermediate_test file and the input_test.txt file
+
+    # The final tapestry is named output.mp4
 
 def genTape(video_list):
 
