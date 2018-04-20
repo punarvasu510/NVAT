@@ -12,6 +12,10 @@ def home():
    return render_template('Home.html')
    #return "Novel Video Analytics and Tapestry"
 
+@app.route('/old')
+def affix():
+   return render_template('home_old.html')
+
 #------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 @app.route('/getTotalCount')

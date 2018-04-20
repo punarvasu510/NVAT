@@ -28,13 +28,11 @@ def genTape(video_list):
         text_script = "ffmpeg -i " + "'\"" + intermediate_dir + str(video) + "\"'" + " -c copy -bsf:v h264_mp4toannexb -f mpegts " + intermediate_dir + "intermediate_" + str(i) + ".ts"
         #ffmpeg -i "/home/.../Video_1_2018-02-02 01-52-51.mp4" -c copy -bsf:v h264_mp4toannexb -f mpegts /home/.../intermediate_1.ts
 
-        #print "text_script --------------- " + text_script
-
         comm = "echo " + text_script + " >> script_intermediate_test"
         call(comm, shell = True)
 
         text_input = "file " + intermediate_dir + "intermediate_" + str(i) + ".ts"
-        #             file     /home/..../         intermediate_      1       .ts
+        #file /home/..../intermediate_1.ts
 
         comm = "echo " + text_input + " >> input_test.txt"
         call(comm, shell = True)
@@ -50,11 +48,9 @@ def genTape(video_list):
     call("./script_intermediate_test", shell = True)
 
     comm = "ffmpeg -f concat -safe 0 -i input_test.txt -c copy " + output_file
-    #print "\n\n\nconcat command ------------------ " + comm + "\n\n\n"
     call(comm, shell = True)
 
     comm = "rm " + intermediate_dir +  "intermediate_*"
-    #print "\n\n\nremove command -------------- " + comm + "\n\n\n"
     call(comm, shell = True)
 
     call("rm *_test*",shell = True)
