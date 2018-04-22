@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>NVAT</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
+  .btn-default {
+      background: #000;
+      color: #fff;
+  }
+  .btn-default:hover {
+      background: #fff;
+      color: #000;
+  }
+  body {
+      position: relative;
+  }
+  #section1 {padding-top:50px; height:600px; color: white; background-image: url("/static/bgim1.jpg");}
+  #section2 {padding-top:50px; height:600px; color: white; background-image: url("/static/bgim2.jpg");}
+  #section3 {padding-top:50px; height:600px; color: white; background-image: url("/static/bgim3.jpg");}
+  #section4 {padding-top:50px; height:600px; color: white; background-image: url("/static/bgim1.jpg");}
+  #section5 {padding-top:50px; height:600px; color: white; background-image: url("/static/bgim3.jpg");}
+  </style>
+</head>
+<body data-spy="scroll" data-target=".navbar" data-offset="50">
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+		  <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Novel Video Analytics and Tapestry</a>
+    </div>
+    <div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li><a href="#section1">Home</a></li>
+          <li><a href="#section2">Intruder Count</a></li>
+          <li><a href="#section3">Intruder Specific Tapestry</a></li>
+          <li><a href="#section4">Video clips</a></li>
+		  <li><a href="#section5">User Specific Video</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div id="section1" class="container-fluid">
+  <h1>Home</h1>
+  <p>Welcome to NVAT, an automated system for the detection of intruders and general surveillance.</p>
+	<p>Our website lets you count, detect and trace the path of an unwanted trespasser(s) without the need of a human monitoring system.</p>
+</div>
+
+<div id="section2" class="container-fluid">
+  <h1>Get Intruder Count</h1>
+  <p> This query is to get total count of intruders in a given timerange </p>
+  <form action="{{ url_for('getTotalCount') }}" method="get" class="form-inline" onsubmit="openModal()" id="myForm">
+    <table>
+      <tr>
+        <td><p class = "notes"> Enter the lower limit of time range </p></td>
+        <td><input type="datetime-local" name="t1" style="color:#000000;"></td>
+      </tr>
+      <tr>
+        <td><p class = "notes"> Enter the upper limit of time range </p></td>
+        <td><input type="datetime-local" name="t2" style="color:#000000;"></td>
+      </tr>
+    </table>
+    <button type="submit" class="btn btn-default">Get Total Count of Intruders</button>
+  </form>
+</div>
+
+<div id="section3" class="container-fluid">
+  <h1>Get Intruder Specific Tapestry</h1>
+  <div id="form">
+    <p class = "highlight"> This query is to get a list of intruder tapestries in a given timerange </p>
+    <p> There are two steps to this:<p>
+    <p> 1) Enter the time range </p>
+    <p> 2) Choose the intruder image whose tapestry you'd like to view </p>
+
+    <form action="{{ url_for('getIntruderProfiles') }}", method="get">
+      <table>
+        <tr>
+          <td><p class = "notes"> Enter the lower limit of time range </p></td>
+          <td><input type="datetime-local" name="t1" style="color:#000000;"></td>
+        </tr>
+        <tr>
+          <td><p class = "notes"> Enter the upper limit of time range </p></td>
+          <td><input type="datetime-local" name="t2" style="color:#000000;"></td>
+        </tr>
+      </table>
+      <input type="submit" class="btn btn-default" value="Get List of Intruder Images" />
+    </form>
+
+  </div >
+
+  <div id="list">
+      {%if list==True%}
+        <table>
+        {% for element in idlist%}
+
+          <tr><td>
+            <form action="{{ url_for('getTapestry') }}", method="get">
+
+              <img src="/static/{{element}}.jpg" width="100" height="100" onclick="submit()"/>
+
+              <input type="hidden" value="{{element}}" name="intid">
+              <input type="hidden" value="{{t1}}" name="t1">
+              <input type="hidden" value="{{t2}}" name="t2">
+            </form>
+          </td></tr>
+        {%endfor%}
+        </table>
+      {%endif%}
+  </div>
+</div>
+
+<div id="section4" class="container-fluid">
+  <h1> Get All Video Clips </h1>
+  <p> This query is to get a list of intruder video clips in a given time range  </p>
+  <form action="{{ url_for('getVideoClips') }}", method="get">
+    <table>
+      <tr>
+        <td><p class = "notes"> Enter the lower limit of time range </p></td>
+        <td><input type="datetime-local" name="t1" style="color:#000000;"></td>
+      </tr>
+      <tr>
+        <td><p class = "notes"> Enter the upper limit of time range </p></td>
+        <td><input type="datetime-local" name="t2" style="color:#000000;"></td>
+      </tr>
+    </table>
+    <button type="submit" class="btn btn-default">Get Video Clips of Intruders</button>
+  </form>
+</div>
+
+<div id="section5" class="container-fluid">
+  <h1> Upload File and Get Analytics </h1>
+  <p> This query is for the user to upload a specific video file and output analytics on that file  </p>
+  <form action="{{ url_for('uploadVideo') }}", method="post"  enctype = "multipart/form-data">
+	 <table>
+		<tr>
+        <td><p class = "notes"> Select video file </p></td>
+		</br>
+        <td><input type="file" name="file_path" accept = "video/*" style="color:#000000;"></td>
+      </tr>
+        <td><p class = "notes"> Enter name/description of the file: </p></td>
+		</br>
+        <td><input type="text" name="description" style="color:#000000;"></td>
+      </tr>
+	  <tr>
+        <td><p class = "notes"> Enter start time: </p></td>
+		</br>
+        <td><input type="datetime-local" name="start_time" style="color:#000000;"></td>
+      </tr>
+	</table>
+	 <button type="submit" class="btn btn-default">Upload File </button>
+  </form>
+</div>
+
+
+
+</body>
+</html>
