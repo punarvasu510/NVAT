@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title> NVAT </title>
+  <style media="screen" type="text/css">
+h1 {
+color: white;
+font-size: 30px;
+font-family: georgia, ariel;
+font-weight: bold;
+}
+.titles {
+color:#E9E9E9;
+font-size: 20px;
+font-style: italic;
+}
+.notes {
+color: #E9E9E9;
+font-size: 20px;
+}
+.highlight {
+color: red;
+font-size: 20px;
+}
+a {
+color: white;
+font-size: 20px;
+}
+p {
+color:white;
+font-size: 20px;
+}
+.bottom {
+  position: fixed;
+  bottom: 0;
+font-size: 10px;
+}
+.wrapper {
+background-color: #222930;
+}
+</style>
+</head>
+<body class = "wrapper" background="/static/bgim3.jpg">
+
+     <form action="{{ url_for('getAnalytics') }}", method="get">
+	
+	<p>
+        Video Uploaded Successfully
+	  </br>
+	  Name: {{ description }}
+	  </br>
+	  File Path: {{ file_path }}
+	  </br>
+	  Start Time: {{start_time}}
+	  </p>
+	  <input type="hidden" name="description" value="{{ description }}">
+	  <input type="hidden" name="start_time" value="{{ start_time }}">
+	  <input type="hidden" name="file_path" value="{{ file_path }}">
+      <input type="submit" value="Get Analytics" >
+
+	</form>
+
+</body>
+</html>
