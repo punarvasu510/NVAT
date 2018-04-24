@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>NVAT</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <style>
+    .bar{
+      fill: steelblue;
+    }
+
+     .bar:hover{
+      fill: brown;
+    }
+
+    .axis {
+      font: 10px sans-serif;
+    }
+    .axis path,
+    .axis line {
+      fill: none;
+      stroke: #000;
+      shape-rendering: crispEdges;
+    }
+  </style>
+</head>
+<body>
+  <script>
+
+        // d3.json('data.json', function(data) {
+        //     console.log(data);
+        // });
+
+        // set the dimensions of the canvas
+        var margin = {top: 20, right: 20, bottom: 70, left: 40},
+            width = 600 - margin.left - margin.right,
+            height = 300 - margin.top - margin.bottom;
+
+
+        // set the ranges
+        var x = d3.scale.ordinal().rangeRoundBands([0, width], .05);
+
+        var y = d3.scale.linear().range([height, 0]);
+
+        // define the axis
+        var xAxis = d3.svg.axis()
+            .scale(x)
+            .orient("bottom")
+
+
+        var yAxis = d3.svg.axis()
+            .scale(y)
+            .orient("left")
+            .ticks(10);
+
+
+        // add the SVG element
+        var svg = d3.select("body").append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+          .append("g")
+            .attr("transform",
+                  "translate(" + margin.left + "," + margin.top + ")");
+
+
+        // load the data
+        d3.json("data.json", function(error, data) {
+
+            data.forEach(function(d) {
+                d.status = d.status;
+                d.minutes = +d.minutes;
+            });
+
+          // scale the range of the data
+          x.domain(data.map(function(d) { return d.status; }));
+          y.domain([0, d3.max(data, function(d) { return d.minutes; })]);
+
+          // add axis
+          svg.append("g")
+              .attr("class", "x axis")
+              .attr("transform", "translate(0," + height + ")")
+              .call(xAxis)
+            .selectAll("text")
+              .style("text-anchor", "end")
+              .attr("dx", "-.8em")
+              .attr("dy", "-.55em")
+              .attr("transform", "rotate(-90)" );
+              //.text("Driver status");
+
+          svg.append("g")
+              .attr("class", "y axis")
+              .call(yAxis)
+            .append("text")
+              .attr("transform", "rotate(-90)")
+              .attr("y", 5)
+              .attr("dy", ".71em")
+              .style("text-anchor", "end")
+              .text("Total no. of minutes");
+
+
+          // Add bar chart
+          svg.selectAll("bar")
+              .data(data)
+            .enter().append("rect")
+              .attr("class", "bar")
+              .attr("x", function(d) { return x(d.status); })
+              .attr("width", x.rangeBand())
+              .attr("y", function(d) { return y(d.minutes); })
+              .attr("height", function(d) { return height - y(d.minutes); });
+
+        });
+
+    </script>
+</body>
+</html>
