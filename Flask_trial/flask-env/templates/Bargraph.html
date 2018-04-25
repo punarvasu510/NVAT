@@ -7,35 +7,47 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <!-- <script src="https://d3js.org/d3.v5.min.js"></script> -->
+
   <style>
+
     .bar{
       fill: steelblue;
     }
 
-     .bar:hover{
+    .bar:hover{
       fill: brown;
     }
 
-    .axis {
-      font: 10px sans-serif;
-    }
-    .axis path,
-    .axis line {
-      fill: none;
-      stroke: #000;
-      shape-rendering: crispEdges;
-    }
-  </style>
-</head>
-<body>
-  <script>
+   .axis {
+     font: 10px sans-serif;
+   }
+   .axis path,
+   .axis line {
+     fill: none;
+     stroke: #000;
+     shape-rendering: crispEdges;
+   }
 
-        // d3.json('data.json', function(data) {
-        //     console.log(data);
-        // });
+   </style>
+  </head>
+  <body>
+    <center>
+    <h2> Day wise intruder distribution </h2>
+    <h4> for the daterange {{ d1 }} and {{ d2 }}</h4>
+    <script src="/static/js/d3.min.js"></script>
+    <script>
 
-        // set the dimensions of the canvas
+        var data = {{ data.intruder_data | safe }}
+
+        console.log(data);
+
+        data.forEach(function(d) {
+                d.date = d.date;
+                d.count = +d.count;
+        });
+
+        //set the dimensions of the canvas
         var margin = {top: 20, right: 20, bottom: 70, left: 40},
             width = 600 - margin.left - margin.right,
             height = 300 - margin.top - margin.bottom;
@@ -66,18 +78,9 @@
             .attr("transform",
                   "translate(" + margin.left + "," + margin.top + ")");
 
-
-        // load the data
-        d3.json("data.json", function(error, data) {
-
-            data.forEach(function(d) {
-                d.status = d.status;
-                d.minutes = +d.minutes;
-            });
-
           // scale the range of the data
-          x.domain(data.map(function(d) { return d.status; }));
-          y.domain([0, d3.max(data, function(d) { return d.minutes; })]);
+          x.domain(data.map(function(d) { return d.date; }));
+          y.domain([0, d3.max(data, function(d) { return d.count; })]);
 
           // add axis
           svg.append("g")
@@ -89,7 +92,7 @@
               .attr("dx", "-.8em")
               .attr("dy", "-.55em")
               .attr("transform", "rotate(-90)" );
-              //.text("Driver status");
+              //.text("Driver date");
 
           svg.append("g")
               .attr("class", "y axis")
@@ -99,7 +102,7 @@
               .attr("y", 5)
               .attr("dy", ".71em")
               .style("text-anchor", "end")
-              .text("Total no. of minutes");
+              .text("Total no. of intruders");
 
 
           // Add bar chart
@@ -107,13 +110,16 @@
               .data(data)
             .enter().append("rect")
               .attr("class", "bar")
-              .attr("x", function(d) { return x(d.status); })
+              .attr("x", function(d) { return x(d.date); })
               .attr("width", x.rangeBand())
-              .attr("y", function(d) { return y(d.minutes); })
-              .attr("height", function(d) { return height - y(d.minutes); });
+              .attr("y", function(d) { return y(d.count); })
+              .attr("height", function(d) { return height - y(d.count); });
 
-        });
+
 
     </script>
-</body>
-</html>
+
+    <h3> <a href="{{ url_for('home')}}"> Home </a> </h3>
+    <center>
+  </body>
+  </html>

@@ -163,6 +163,8 @@ class UserQuery:
 		output = generateTapestry.genTape(video_clips)
 		return output
 
+	
+
 if __name__ == '__main__':
 	# Get total intruders in the given time range
 	total_intruders = UserQuery.get_intruder_count("2018-02-02 01:50:00", "2018-02-02 02:50:00")
